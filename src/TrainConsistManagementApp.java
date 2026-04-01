@@ -1,65 +1,53 @@
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * =============================================================
  * MAIN CLASS - TrainConsistManagementApp
  * =============================================================
  *
- * Use Case 4: Maintain Ordered Bogie Consist (LinkedList)
+ * Use Case 5: Preserve Insertion Order of Bogies
  *
  * Description:
- * This class models the ordered structure of a train consist
- * using LinkedList, allowing insertion and removal at specific
- * positions.
+ * This class maintains the order of bogies as they are added
+ * while ensuring no duplicates exist using LinkedHashSet.
  *
  * At this stage, the application:
- * - Adds bogies in sequence
- * - Inserts bogies at a specific position
- * - Removes bogies from front and rear
- * - Displays updated train consist
+ * - Adds bogies in order
+ * - Preserves insertion sequence
+ * - Prevents duplicate entries
+ * - Displays final train formation
  *
- * This demonstrates ordered operations using LinkedList.
+ * This demonstrates ordered uniqueness using LinkedHashSet.
  *
  * @author Developer
- * @version 4.0
+ * @version 5.0
  */
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        System.out.println("=====================================");
-        System.out.println(" UC4 - Maintain Ordered Bogie Consist ");
-        System.out.println("=====================================\n");
+        System.out.println("=========================================");
+        System.out.println(" UC5 - Preserve Insertion Order of Bogies ");
+        System.out.println("=========================================\n");
 
-        // LinkedList for ordered train consist
-        LinkedList<String> train = new LinkedList<>();
+        // LinkedHashSet preserves order and avoids duplicates
+        Set<String> train = new LinkedHashSet<>();
 
-        // ----- Add bogies in sequence -----
+        // ----- Add bogies -----
         train.add("Engine");
         train.add("Sleeper");
-        train.add("AC");
         train.add("Cargo");
         train.add("Guard");
 
-        System.out.println("Initial Train Consist:");
+        // ----- Attempt duplicate -----
+        train.add("Sleeper"); // will be ignored
+
+        // ----- Display formation -----
+        System.out.println("Final Train Formation:");
         System.out.println(train);
 
-        // ----- Insert at specific position -----
-        train.add(2, "Pantry Car");
-
-        System.out.println("\nAfter Adding Pantry Car at position 2:");
-        System.out.println(train);
-
-        // ----- Remove first and last bogie -----
-        train.removeFirst();
-        train.removeLast();
-
-        System.out.println("\nAfter Removing First and Last Bogie:");
-        System.out.println(train);
-
-        // ----- Final Output -----
-        System.out.println("\nFinal Ordered Train Consist:");
-        System.out.println(train);
+        System.out.println("\nTotal Bogies: " + train.size());
     }
 }
