@@ -1,53 +1,76 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * =============================================================
  * MAIN CLASS - TrainConsistManagementApp
  * =============================================================
  *
- * Use Case 5: Preserve Insertion Order of Bogies
+ * Use Case 7: Sort Bogies by Capacity (Comparator)
  *
  * Description:
- * This class maintains the order of bogies as they are added
- * while ensuring no duplicates exist using LinkedHashSet.
+ * This class sorts passenger bogies based on seating
+ * capacity using a custom Comparator.
  *
  * At this stage, the application:
- * - Adds bogies in order
- * - Preserves insertion sequence
- * - Prevents duplicate entries
- * - Displays final train formation
+ * - Creates bogie objects
+ * - Stores them in a list
+ * - Displays unsorted data
+ * - Sorts using Comparator logic
+ * - Displays sorted result
  *
- * This demonstrates ordered uniqueness using LinkedHashSet.
+ * This maps custom ordering using Comparator.
  *
  * @author Developer
- * @version 5.0
+ * @version 7.0
  */
 
 public class TrainConsistManagementApp {
 
+    // Inner class to represent Bogie
+    static class Bogie {
+
+        String name;
+        int capacity;
+
+        public Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+
+        public void display() {
+            System.out.println(name + " | Capacity: " + capacity);
+        }
+    }
+
     public static void main(String[] args) {
 
         System.out.println("=========================================");
-        System.out.println(" UC5 - Preserve Insertion Order of Bogies ");
+        System.out.println(" UC7 - Sort Bogies by Capacity ");
         System.out.println("=========================================\n");
 
-        // LinkedHashSet preserves order and avoids duplicates
-        Set<String> train = new LinkedHashSet<>();
+        // Create list of bogies
+        List<Bogie> bogies = new ArrayList<>();
 
-        // ----- Add bogies -----
-        train.add("Engine");
-        train.add("Sleeper");
-        train.add("Cargo");
-        train.add("Guard");
+        // Add bogies
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 50));
+        bogies.add(new Bogie("First Class", 30));
 
-        // ----- Attempt duplicate -----
-        train.add("Sleeper"); // will be ignored
+        // ----- Display unsorted -----
+        System.out.println("Unsorted Bogies:\n");
+        for (Bogie b : bogies) {
+            b.display();
+        }
 
-        // ----- Display formation -----
-        System.out.println("Final Train Formation:");
-        System.out.println(train);
+        // ----- Sort using Comparator -----
+        bogies.sort(Comparator.comparingInt(b -> b.capacity));
 
-        System.out.println("\nTotal Bogies: " + train.size());
+        // ----- Display sorted -----
+        System.out.println("\nSorted Bogies (by Capacity):\n");
+        for (Bogie b : bogies) {
+            b.display();
+        }
     }
 }
